@@ -12,14 +12,14 @@ function App() {
       <h1>WORDS:</h1>
       {data.map((item) => (
         <>
-          <p>
+          <div>
             {item.word} -{" "}
             {item?.translation.map((w) => (
               <>
                 <p>{w} </p>
               </>
             ))}
-          </p>
+          </div>
           {item?.phrases?.map((phrase) => (
             <div>{phrase}</div>
           ))}

@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Loader from "./elements/Loader/Loader";
+import { useGetWordsQuery } from "./redux/wordsApi";
 
 function App() {
+  const { data = [], isLoading } = useGetWordsQuery();
+  console.log("DATA --->", data);
+
+  if (isLoading) return <Loader />;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>WORDS:</h1>
+      {data.map((item) => (
+        <>
+          <p>
+            {item.word} -{" "}
+            {item?.translation.map((w) => (
+              <>
+                <p>{w} </p>
+              </>
+            ))}
+          </p>
+          {item?.phrases?.map((phrase) => (
+            <div>{phrase}</div>
+          ))}
+        </>
+      ))}
     </div>
   );
 }
